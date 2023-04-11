@@ -1,9 +1,11 @@
-﻿using CrossZero.Controllers;
-using CrossZero.Views;
+﻿using System.Text;
 
-Model model = new Model(size: 3, winSize: 3);
-View view = new View(model);
-Controller controller = new Controller(model, view);
-
-controller.Run();
-
+TextReader reader = new StreamReader("c:\\temp\\222.txt");
+string line;
+//Console.OutputEncoding = Encoding.UTF8;
+Console.WriteLine("Привіт");
+while ((line = reader.ReadLine()) != null)
+{
+   Console.WriteLine(line);
+}
+reader.Close();

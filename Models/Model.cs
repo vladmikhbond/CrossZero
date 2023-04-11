@@ -1,4 +1,6 @@
-﻿public enum Cell { Empty, Cross, Zero };
+﻿using CrossZero.Models;
+
+public enum Cell { Empty, Cross, Zero };
 
 public enum GameState { WaitForCross, WaitForZero };
 
@@ -24,14 +26,15 @@ public class Model
       get { return cells[r * Size + c]; }
    }
 
-   public void Turn(string rc)
-   {
-      // ...
-      Turn(1, 2);
-   }
 
    public void Turn(int row, int col)
    {
+      if (row < 0 || row >= Size || col < 0 || col >= Size)
+         throw new CrossZeroException("Turn is out of field.");
+
+      if (this[row, col] != Cell.Empty)
+         throw new CrossZeroException("Cell is not empty.");
+
       switch (GameState)
       {
          case GameState.WaitForCross:

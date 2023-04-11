@@ -1,4 +1,5 @@
-﻿using CrossZero.Views;
+﻿using CrossZero.Models;
+using CrossZero.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +40,29 @@ namespace CrossZero.Controllers
 
          void DoTurn()
          {
-            string str = Console.ReadLine()!;
-            int n = Convert.ToInt32(str);
-            model.Turn(n / 10, n % 10);
+            string str = Console.ReadLine();
+
+            // validate user input
+            try
+            {
+               int n = Convert.ToInt32(str);
+               model.Turn(n / 10, n % 10);
+            }
+            catch (FormatException ex)
+            {
+               Display(ex.Message);
+            }
+            catch (CrossZeroException ex)
+            {
+               Display(ex.Message);
+            }
+         }
+
+         void Display(string message)
+         {
+            Console.WriteLine(message);
+            Console.WriteLine("Press Enter.");
+            Console.ReadLine();
          }
       }
 
